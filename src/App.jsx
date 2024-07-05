@@ -15,13 +15,13 @@ const App = () => {
 
   return (
     <div>
-      <Toaster/>
+      <Toaster />
       <a href="#main" className="skip-to-content">
         Skip to content
       </a>
 
       <Header onSearch={handleSearch} />
-      <Home username={username} />
+      <Home username={username} setUsername={setUsername} />
       <Footer />
     </div>
   );

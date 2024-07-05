@@ -16,6 +16,7 @@ const TabContent = ({
   following = [],
   loadingFollowing,
   errorFollowing,
+  setUsername,
 }) => {
   const [activeTab, setActiveTab] = useState("tab-1");
 
@@ -25,10 +26,17 @@ const TabContent = ({
 
   return (
     <section className="tab-container">
-      <TabList activeTab={activeTab} onTabClick={handleTabClick} />
+      <TabList
+        activeTab={activeTab}
+        onTabClick={handleTabClick}
+        reposCount={repos?.length || 0}
+        forkedCount={repos?.filter((repo) => repo.fork).length || 0}
+        followersCount={followers?.length || 0}
+        followingCount={following?.length || 0}
+      />
       <TabPanel
         id="panel-1"
-        label="Repositories"
+        label={`Repositories (${repos?.length || 0})`}
         hidden={activeTab !== "tab-1"}
       >
         {loadingRepos ? (
@@ -55,7 +63,9 @@ const TabContent = ({
 
       <TabPanel
         id="panel-2"
-        label="Forked repositories"
+        label={`Forked repositories (${
+          repos?.filter((repo) => repo.fork).length || 0
+        })`}
         hidden={activeTab !== "tab-2"}
       >
         {loadingRepos ? (
@@ -82,7 +92,11 @@ const TabContent = ({
         )}
       </TabPanel>
 
-      <TabPanel id="panel-3" label="Followers" hidden={activeTab !== "tab-3"}>
+      <TabPanel
+        id="panel-3"
+        label={`Followers (${followers?.length || 0})`}
+        hidden={activeTab !== "tab-3"}
+      >
         {loadingFollowers ? (
           renderSkeletons(10, FollowerSkeleton)
         ) : errorFollowers ? (
@@ -93,6 +107,7 @@ const TabContent = ({
               key={follower.id}
               imgSrc={follower.avatar_url}
               username={follower.login}
+              setUsername={setUsername}
             />
           ))
         ) : (
@@ -100,7 +115,11 @@ const TabContent = ({
         )}
       </TabPanel>
 
-      <TabPanel id="panel-4" label="Followings" hidden={activeTab !== "tab-4"}>
+      <TabPanel
+        id="panel-4"
+        label={`Following (${following?.length || 0})`}
+        hidden={activeTab !== "tab-4"}
+      >
         {loadingFollowing ? (
           renderSkeletons(10, FollowerSkeleton)
         ) : errorFollowing ? (
@@ -111,6 +130,7 @@ const TabContent = ({
               key={follow.id}
               imgSrc={follow.avatar_url}
               username={follow.login}
+              setUsername={setUsername}
             />
           ))
         ) : (
@@ -144,13 +164,20 @@ const TabButton = ({
   </button>
 );
 
-const TabList = ({ activeTab, onTabClick }) => {
+const TabList = ({
+  activeTab,
+  onTabClick,
+  reposCount,
+  forkedCount,
+  followersCount,
+  followingCount,
+}) => {
   return (
     <div className="tab-list" aria-label="Tab navigation" role="tablist">
       <TabButton
         id="tab-1"
         isSelected={activeTab === "tab-1"}
-        label="Repositories"
+        label={`Repositories (${reposCount})`}
         tabIndex="0"
         ariaControls="panel-1"
         dataAttributes={{ "data-tab-btn": true }}
@@ -159,7 +186,7 @@ const TabList = ({ activeTab, onTabClick }) => {
       <TabButton
         id="tab-2"
         isSelected={activeTab === "tab-2"}
-        label="Forked"
+        label={`Forked (${forkedCount})`}
         tabIndex="-1"
         ariaControls="panel-2"
         dataAttributes={{ "data-tab-btn": true, "data-forked-tab-btn": true }}
@@ -168,7 +195,7 @@ const TabList = ({ activeTab, onTabClick }) => {
       <TabButton
         id="tab-3"
         isSelected={activeTab === "tab-3"}
-        label="Followers"
+        label={`Followers (${followersCount})`}
         tabIndex="-1"
         ariaControls="panel-3"
         dataAttributes={{ "data-tab-btn": true, "data-follower-tab-btn": true }}
@@ -177,7 +204,7 @@ const TabList = ({ activeTab, onTabClick }) => {
       <TabButton
         id="tab-4"
         isSelected={activeTab === "tab-4"}
-        label="Following"
+        label={`Following (${followingCount})`}
         tabIndex="-1"
         ariaControls="panel-4"
         dataAttributes={{

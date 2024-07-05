@@ -6,7 +6,7 @@ import Profile from "../profile/Profile";
 import TabContent from "../tabContent/TabContent";
 import useFetchGitHubData from "../../hook/useFetchGitHubData";
 
-const Home = ({ username }) => {
+const Home = ({ username, setUsername }) => {
   const {
     data: userData,
     loading: loadingUser,
@@ -48,6 +48,7 @@ const Home = ({ username }) => {
               following={following}
               loadingFollowing={loadingFollowing}
               errorFollowing={errorFollowing}
+              setUsername={setUsername}
             />
           </>
         ) : (

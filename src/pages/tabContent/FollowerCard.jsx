@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
-const FollowerCard = ({ imgSrc, username }) => {
+const FollowerCard = ({ imgSrc, username, setUsername }) => {
+  const handleClick = (username) => {
+    setUsername(username);
+  };
   return (
     <article className="card follower-card">
       <figure className="avatar-circle img-holder">
@@ -13,7 +16,11 @@ const FollowerCard = ({ imgSrc, username }) => {
         />
       </figure>
       <h3 className="card-title">{username}</h3>
-      <button className="icon-btn" aria-label={`Go to ${username} profile`}>
+      <button
+        className="icon-btn"
+        aria-label={`Go to ${username} profile`}
+        onClick={() => handleClick(username)}
+      >
         <span className="material-symbols-rounded" aria-hidden="true">
           link
         </span>

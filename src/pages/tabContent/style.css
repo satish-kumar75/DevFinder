@@ -1,3 +1,8 @@
+.tab-container {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
 .tab-btn {
     position: relative;
     height: 48px;

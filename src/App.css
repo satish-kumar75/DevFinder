@@ -268,6 +268,14 @@
     padding-inline: 0;
   }
 
+  .error {
+    position: fixed;
+    top: var(--header-height);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
   footer.footer {
     display: none;
   }
