@@ -32,18 +32,7 @@ const TabContent = ({
         hidden={activeTab !== "tab-1"}
       >
         {loadingRepos ? (
-          <div className="card repo-skeleton">
-            <div className="card-body">
-              <div className="skeleton title-skeleton"></div>
-              <div className="skeleton text-skeleton text-1"></div>
-              <div className="skeleton text-skeleton text-2"></div>
-            </div>
-            <div className="card-footer">
-              <div className="skeleton text-skeleton"></div>
-              <div className="skeleton text-skeleton"></div>
-              <div className="skeleton text-skeleton"></div>
-            </div>
-          </div>
+          renderSkeletons(6, RepoSkeleton)
         ) : errorRepos ? (
           <ErrorContent message="Doesn't have any public repositories yet." />
         ) : repos?.length > 0 ? (
@@ -70,18 +59,7 @@ const TabContent = ({
         hidden={activeTab !== "tab-2"}
       >
         {loadingRepos ? (
-          <div className="card repo-skeleton">
-            <div className="card-body">
-              <div className="skeleton title-skeleton"></div>
-              <div className="skeleton text-skeleton text-1"></div>
-              <div className="skeleton text-skeleton text-2"></div>
-            </div>
-            <div className="card-footer">
-              <div className="skeleton text-skeleton"></div>
-              <div className="skeleton text-skeleton"></div>
-              <div className="skeleton text-skeleton"></div>
-            </div>
-          </div>
+          renderSkeletons(6, RepoSkeleton)
         ) : errorRepos ? (
           <ErrorContent message="Doesn't have any forked repositories yet." />
         ) : repos?.filter((repo) => repo.fork)?.length > 0 ? (
@@ -106,10 +84,7 @@ const TabContent = ({
 
       <TabPanel id="panel-3" label="Followers" hidden={activeTab !== "tab-3"}>
         {loadingFollowers ? (
-          <div className="card follower-skeleton">
-            <div className="skeleton avatar-skeleton"></div>
-            <div className="skeleton title-skeleton"></div>
-          </div>
+          renderSkeletons(10, FollowerSkeleton)
         ) : errorFollowers ? (
           <ErrorContent message="Doesn't have any followers yet." />
         ) : followers?.length > 0 ? (
@@ -127,10 +102,7 @@ const TabContent = ({
 
       <TabPanel id="panel-4" label="Followings" hidden={activeTab !== "tab-4"}>
         {loadingFollowing ? (
-          <div className="card follower-skeleton">
-            <div className="skeleton avatar-skeleton"></div>
-            <div className="skeleton title-skeleton"></div>
-          </div>
+          renderSkeletons(10, FollowerSkeleton)
         ) : errorFollowing ? (
           <ErrorContent message="Doesn't have any followings yet." />
         ) : following?.length > 0 ? (
@@ -239,5 +211,33 @@ const ErrorContent = ({ message }) => (
     <p className="text">{message}</p>
   </div>
 );
+
+const RepoSkeleton = () => (
+  <div className="card repo-skeleton">
+    <div className="card-body">
+      <div className="skeleton title-skeleton"></div>
+      <div className="skeleton text-skeleton text-1"></div>
+      <div className="skeleton text-skeleton text-2"></div>
+    </div>
+    <div className="card-footer">
+      <div className="skeleton text-skeleton"></div>
+      <div className="skeleton text-skeleton"></div>
+      <div className="skeleton text-skeleton"></div>
+    </div>
+  </div>
+);
+
+const FollowerSkeleton = () => (
+  <div className="card follower-skeleton">
+    <div className="skeleton avatar-skeleton"></div>
+    <div className="skeleton title-skeleton"></div>
+  </div>
+);
+
+const renderSkeletons = (count, SkeletonComponent) => {
+  return Array.from({ length: count }).map((_, index) => (
+    <SkeletonComponent key={index} />
+  ));
+};
 
 export default TabContent;
