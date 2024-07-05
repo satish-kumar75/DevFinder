@@ -1,0 +1,12 @@
+.footer {
+    padding-block-start: 16px;
+    border-block-start: 1px solid var(--outline);
+    margin-block-start: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyright {
+    color: var(--on-surface-2);
+}
