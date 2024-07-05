@@ -1,0 +1,18 @@
+.gitContainer {
+    padding-inline: 16px;
+    max-width: 1200px;
+    width: 100%;
+    margin-inline: auto;
+    margin-block-start: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.gitContainer ::-webkit-scrollbar {
+    display: none;
+}
+
+.tooltip {
+    background-color: var(--surface-variant);
+    color: var(--primary);
+}

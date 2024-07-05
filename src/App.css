@@ -175,6 +175,14 @@
   pointer-events: all;
 }
 
+.githubActivity {
+  text-align: center;
+  margin-block-start: 25px;
+  font-weight: var(--weight-regular);
+}
+.githubActivity .blue{
+  color: var(--primary);
+}
 
 
 /*-----------------------------------*\
