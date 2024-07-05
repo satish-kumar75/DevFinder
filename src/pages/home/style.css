@@ -18,9 +18,6 @@
 /* ERROR */
 
 .error {
-    position: fixed;
-    top: var(--header-height);
-    left: 0;
     width: 100%;
     height: calc(100vh - var(--header-height));
     height: calc(100dvh - var(--header-height));
