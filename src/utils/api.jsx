@@ -29,8 +29,8 @@ const fetchDataFromGitHubApi = async (url, params) => {
 
     return data;
   } catch (err) {
-    console.log(err);
-    return err;
+    console.error("Error fetching data from GitHub API:", err);
+    throw err;
   }
 };
 
